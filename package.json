@@ -1,0 +1,51 @@
+{
+  "name": "mise-gui",
+  "productName": "Mise GUI",
+  "version": "0.1.0",
+  "description": "A desktop GUI companion for the mise dev tool manager",
+  "author": "mise-gui",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "type": "module",
+  "main": "dist-electron/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build && node scripts/test-build.cjs",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "start": "electron .",
+    "dist:win": "npm run build && electron-builder --win nsis --x64 --publish never",
+    "test:package": "node scripts/test-package.cjs",
+    "lint": "eslint . --max-warnings 0",
+    "check": "npm run lint && npm run typecheck && npm test && npm run build",
+    "test:desktop": "npm run build && node scripts/test-desktop.cjs",
+    "test:installed": "npm run build && node scripts/test-installed.cjs",
+    "test:graph": "npm run build && node scripts/test-tool-graph.cjs",
+    "test": "node --experimental-strip-types scripts/test-parse.ts && node --experimental-strip-types scripts/test-config.ts && node --experimental-strip-types scripts/test-pins.ts && node --experimental-strip-types scripts/test-envdir.ts && node --experimental-strip-types scripts/test-installer.ts && node --experimental-strip-types scripts/test-connections.ts && node --experimental-strip-types scripts/test-canvas.ts && node --experimental-strip-types scripts/test-ipc.ts"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "smol-toml": "1.9.1"
+  },
+  "devDependencies": {
+    "@electron/asar": "3.4.1",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "22.20.5",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "5.2.0",
+    "electron": "45.0.0",
+    "electron-builder": "26.18.0",
+    "eslint": "10.13.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "8.72.0",
+    "vite": "8.3.5",
+    "vite-plugin-electron": "1.1.2"
+  }
+}
